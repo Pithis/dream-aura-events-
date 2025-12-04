@@ -1,851 +1,942 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dream aura events </title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>" />
+    <title>Dream Aura Events | Creating Timeless Experiences</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✨</text></svg>" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&family=Great+Vibes&display=swap"
+        rel="stylesheet" />
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+
     <style>
         :root {
-            --black: #000000;
-            --white: #ffffff;
-            --gray-900: #0a0a0a;
-            --gray-800: #121212;
-            --accent: #ff2a6d;
-            --accent-light: #ff5c8a;
-            --text: #f0f0f0;
-            --text-muted: #a0a0a0;
+            /* === LIGHT THEME VARIABLES === */
+            --bg-dark: #f8f8f8;
+            /* Light background */
+            --bg-card: #ffffff;
+            /* White card background */
+            --primary: #ff2a6d;
+            --primary-glow: rgba(255, 42, 109, 0.4);
+            --text-main: #121212;
+            /* Dark text */
+            --text-muted: #525252;
+            /* Medium gray text */
+            --border-light: #e5e5e5;
+            /* Light gray border */
+
+            --font-disney: 'Great Vibes', cursive;
+            --font-body: 'Outfit', sans-serif;
         }
 
+        /* === GLOBAL RESET === */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            cursor: none;
+            /* Hide default cursor for custom one */
         }
 
         body {
-            background-color: var(--black);
-            color: var(--text);
-            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: var(--font-body);
             overflow-x: hidden;
-            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
         }
 
-        h1, h2, h3, h4 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 700;
-            line-height: 1.2;
+        a {
+            text-decoration: none;
+            color: inherit;
         }
 
-        /* === HERO (FIXED BG) === */
-        .hero {
-            height: 100vh;
-            width: 100%;
+        /* === NAVIGATION BAR STYLES (UPDATED FOR LIGHT THEME) === */
+        #main-nav {
             position: fixed;
             top: 0;
             left: 0;
+            width: 100%;
+            z-index: 9000;
+            padding: 15px 0;
+            transition: background-color 0.3s, border-bottom 0.3s;
+            backdrop-filter: blur(10px);
+            /* Glassmorphism effect */
+            background-color: rgba(255, 255, 255, 0.1);
+            /* Very light initial background */
+            border-bottom: 1px solid transparent;
+        }
+
+        .nav-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-family: var(--font-disney);
+            font-size: 2.2rem;
+            color: var(--text-main);
+            /* Dark color for logo on light bg */
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            /* Subtle dark shadow */
+            padding: 0 1rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            padding: 0 1rem;
+        }
+
+        .nav-links a {
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            color: var(--text-main);
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+            text-shadow: 0 0 10px var(--primary-glow);
+        }
+
+        /* Nav Scrolled State (for better contrast) */
+        #main-nav.nav-scrolled {
+            background-color: rgba(255, 255, 255, 0.85);
+            /* Solid white/light on scroll */
+            border-bottom: 1px solid var(--border-light);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        /* === CUSTOM CURSOR === */
+        .cursor-dot,
+        .cursor-outline {
+            position: fixed;
+            top: 0;
+            left: 0;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            z-index: 9999;
+            pointer-events: none;
+        }
+
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--primary);
+        }
+
+        .cursor-outline {
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--primary);
+            transition: width 0.2s, height 0.2s, background-color 0.2s;
+        }
+
+        body:hover .cursor-outline {
+            opacity: 1;
+        }
+
+        /* === TYPOGRAPHY (DEFAULT) === */
+        h1,
+        h2,
+        h3 {
+            font-family: var(--font-body);
+            line-height: 1.1;
+            color: var(--text-main);
+            /* Ensure headings are dark */
+        }
+
+        /* === SECTION TITLES (DISNEY FONT) === */
+        .section-title {
+            font-family: var(--font-disney);
+            /* Apply Disney Font */
+            font-size: clamp(3rem, 6vw, 5rem);
+            text-align: center;
+            margin-bottom: 1rem;
+
+            /* Subtle Glow */
+            color: var(--primary);
+            text-shadow: 0 0 15px rgba(255, 42, 109, 0.3);
+            background: none;
+            -webkit-background-clip: unset;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 0.875rem;
+            margin-bottom: 4rem;
+            display: block;
+        }
+
+        /* === PRELOADER === */
+        .preloader {
+            position: fixed;
+            inset: 0;
+            background: var(--bg-dark);
+            z-index: 10000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: fadeOut 1s ease 2s forwards;
+            pointer-events: none;
+        }
+
+        .loader-text {
+            font-family: var(--font-disney);
+            /* Apply Disney Font */
+            font-size: 3rem;
+            color: var(--primary);
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 0.5;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        /* === HERO SECTION === */
+        .hero {
+            /* Added margin-top to account for fixed nav */
+            padding-top: 80px;
+            height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            text-align: center;
-            z-index: -1;
+            position: relative;
+            overflow: hidden;
         }
 
-        .hero-bg {
+        .hero-video {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: brightness(0.3);
-        }
-
-        .hero-gradient {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.5), transparent, rgba(0,0,0,0.8));
+            opacity: 0.7;
+            /* Increased opacity for light background video */
+            filter: none;
+            /* Removed grayscale */
         }
 
         .hero-content {
-            max-width: 900px;
-            padding: 0 2rem;
             z-index: 2;
+            text-align: center;
+            padding: 0 1rem;
+            max-width: 1000px;
         }
 
+        /* === HERO H1 (MAXIMUM DISNEY EFFECT) - ADJUSTED FOR LIGHT BG === */
         .hero h1 {
-            font-size: clamp(3rem, 8vw, 7rem);
-            background: linear-gradient(90deg, #ffffff, var(--accent));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+            font-family: var(--font-disney);
+            /* Apply Disney Font */
+            font-size: clamp(4rem, 10vw, 9rem);
             margin-bottom: 1.5rem;
-            letter-spacing: -0.03em;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: slideUp 1s ease 2.2s forwards, float 6s ease-in-out infinite 2.2s;
+
+            /* Magical Text Styling: Removed text-shadow to prevent washout */
+            color: var(--primary);
+            /* Use primary color or a dark color that contrasts with the video */
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background: none;
+            -webkit-background-clip: unset;
+
         }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+
+            /* Gentle vertical float */
+        }
+
 
         .hero p {
-            font-size: 1.25rem;
-            color: var(--text-muted);
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: var(--text-main);
+            /* Dark text on video */
             max-width: 600px;
             margin: 0 auto 2.5rem;
-            line-height: 1.6;
+            opacity: 0;
+            animation: slideUp 1s ease 2.4s forwards;
         }
 
-        .scroll-indicator {
-            position: absolute;
-            bottom: 3rem;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.5rem;
-            cursor: pointer;
-            animation: pulse 2s infinite;
-        }
-
-        .scroll-indicator span {
-            font-size: 0.875rem;
-            letter-spacing: 2px;
+        .btn-glow {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            border-radius: 50px;
+            font-weight: 500;
             text-transform: uppercase;
-            color: var(--text-muted);
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 0.4; }
-            50% { opacity: 1; }
-        }
-
-        /* === CONTENT WRAPPER === */
-        .content-wrapper {
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
             position: relative;
-            top: 100vh;
-            background: var(--gray-900);
+            overflow: hidden;
+            opacity: 0;
+            animation: slideUp 1s ease 2.6s forwards;
         }
 
-        /* === SECTIONS === */
+        .btn-glow:hover {
+            background: var(--primary);
+            color: #fff;
+            box-shadow: 0 0 30px var(--primary-glow);
+        }
+
+        @keyframes slideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* === SECTIONS GENERAL === */
         section {
             padding: 120px 2rem;
             position: relative;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1280px;
             margin: 0 auto;
         }
 
-        .section-header {
-            text-align: center;
-            margin-bottom: 4rem;
-            position: relative;
-        }
-
-        .section-header h2 {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            margin-bottom: 1.5rem;
-        }
-
-        .section-header::after {
-            content: '';
-            display: block;
-            width: 80px;
-            height: 4px;
-            background: var(--accent);
-            margin: 1.5rem auto 0;
-            border-radius: 2px;
-        }
-
-        /* === ABOUT === */
-        .about-content {
-            max-width: 900px;
-            margin: 0 auto;
+        /* === EVENT CATEGORIES (BENTO GRID) === */
+        .grid-gallery {
             display: grid;
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
         }
 
-        .about-card {
-            background: linear-gradient(135deg, var(--gray-800) 0%, var(--gray-900) 100%);
-            border-radius: 24px;
-            padding: 3rem;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+        .event-card {
             position: relative;
+            height: 400px;
+            border-radius: 20px;
             overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-        }
-
-        .about-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(255, 42, 109, 0.1) 0%, transparent 50%);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-
-        .about-card:hover::before {
-            opacity: 1;
-        }
-
-        .about-card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(255, 42, 109, 0.3);
-            box-shadow: 0 20px 60px rgba(255, 42, 109, 0.15);
-        }
-
-        .about-text {
-            font-size: 1.125rem;
-            line-height: 1.8;
-            color: var(--text-muted);
-            position: relative;
-            z-index: 1;
-        }
-
-        .about-highlight {
-            color: var(--accent);
-            font-weight: 600;
-        }
-
-        /* === WHY US === */
-        #why-us {
-            position: relative;
-            background: var(--gray-900);
-            padding: 120px 2rem;
-        }
-
-        .why-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('images/bg.png') center/cover no-repeat;
-            opacity: 0.08;
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        .why-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .why-card {
-            background: var(--gray-800);
-            border-radius: 24px;
-            padding: 2.5rem;
-            transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            min-height: 320px;
-        }
-
-        .why-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--accent), var(--accent-light));
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.5s ease;
-        }
-
-        .why-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .why-card:hover {
-            transform: translateY(-16px);
-            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.5);
-            border-color: rgba(255, 42, 109, 0.4);
-        }
-
-        .why-icon {
-            width: 64px;
-            height: 64px;
-            background: linear-gradient(135deg, var(--accent), var(--accent-light));
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
+            border: 1px solid var(--border-light);
+            group: cursor-pointer;
             transition: transform 0.4s ease;
         }
 
-        .why-card:hover .why-icon {
-            transform: scale(1.1) rotate(5deg);
+        .event-card:hover {
+            transform: scale(0.98);
         }
 
-        .why-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: white;
-        }
-
-        .why-card p {
-            color: var(--text-muted);
-            line-height: 1.7;
-            flex-grow: 1;
-        }
-
-        /* === WORKS === */
-        .works-section {
-            padding: 120px 0;
-            background: var(--gray-900);
-        }
-
-        .works-marquee {
-            position: relative;
-            overflow: hidden;
-            white-space: nowrap;
-        }
-
-        .works-track {
-            display: inline-block;
-            animation: scroll 30s linear infinite;
-            padding-left: 20px;
-        }
-
-        .works-track.reverse {
-            animation-direction: reverse;
-            animation-duration: 25s;
-        }
-
-        .work-item {
-            display: inline-block;
-            width: 320px;
-            height: 480px;
-            margin: 0 20px;
-            border-radius: 20px;
-            overflow: hidden;
-            position: relative;
-            vertical-align: top;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
-        }
-
-        .work-item:hover {
-            transform: scale(1.05);
-            box-shadow: 0 20px 60px rgba(255, 42, 109, 0.3);
-        }
-
-        .work-img {
+        .event-bg {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.6s ease;
+            transition: transform 0.7s ease;
+            filter: brightness(0.6);
         }
 
-        .work-item:hover .work-img {
+        .event-card:hover .event-bg {
             transform: scale(1.1);
+            filter: brightness(0.4);
         }
 
-        .work-overlay {
+        .event-content {
             position: absolute;
             bottom: 0;
             left: 0;
-            right: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.95), transparent);
-            padding: 1.5rem;
-            color: white;
+            padding: 2rem;
+            width: 100%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+        }
+
+        .event-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #fff;
+            /* Keep text white for contrast on the dark gradient */
+        }
+
+        .event-content p {
+            font-size: 0.9rem;
+            color: #ccc;
+            /* Lighter color for muted text on dark gradient */
+        }
+
+        /* === SERVICES LIST (CAPABILITIES) - UPDATED FOR LIGHT THEME === */
+        .services-wrapper {
+            background: var(--bg-card);
+            border-radius: 30px;
+            padding: 4rem;
+            margin-top: 4rem;
+            border: 1px solid var(--border-light);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+        }
+
+        .service-item {
+            text-align: center;
+            padding: 1rem;
             transition: transform 0.3s ease;
         }
 
-        .work-overlay h3 {
-            font-size: 1.25rem;
-            margin-bottom: 0.5rem;
+        .service-item:hover {
+            transform: translateY(-10px);
         }
 
-        .work-overlay p {
-            font-size: 0.95rem;
-            color: var(--text-muted);
-        }
-
-        @keyframes scroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-
-        /* === APPROACH === */
-        .approach-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2.5rem;
-            margin-top: 3rem;
-        }
-
-        .step-card {
-            background: linear-gradient(135deg, var(--gray-800) 0%, var(--gray-900) 100%);
-            border-radius: 28px;
-            padding: 3rem 2.5rem;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .step-card::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 200px;
-            height: 200px;
-            background: radial-gradient(circle, rgba(255, 42, 109, 0.15), transparent);
-            transform: translate(-50%, -50%) scale(0);
-            transition: transform 0.5s ease;
+        .icon-box {
+            width: 70px;
+            height: 70px;
+            background: rgba(255, 42, 109, 0.1);
             border-radius: 50%;
-        }
-
-        .step-card:hover::after {
-            transform: translate(-50%, -50%) scale(2);
-        }
-
-        .step-card:hover {
-            border-color: var(--accent);
-            transform: translateY(-12px);
-            box-shadow: 0 24px 48px rgba(255, 42, 109, 0.2);
-        }
-
-        .step-number {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, var(--accent), var(--accent-light));
-            color: var(--white);
-            font-size: 2.5rem;
-            font-weight: 800;
-            border-radius: 50%;
-            margin: 0 auto 2rem;
-            position: relative;
-            z-index: 1;
-            box-shadow: 0 8px 24px rgba(255, 42, 109, 0.3);
-            transition: transform 0.4s ease;
+            margin: 0 auto 1.5rem;
+            color: var(--primary);
         }
 
-        .step-card:hover .step-number {
-            transform: scale(1.1) rotate(360deg);
+        .icon-box i {
+            width: 32px;
+            height: 32px;
         }
 
-        .step-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: white;
-            position: relative;
-            z-index: 1;
+        .service-item h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
         }
 
-        .step-card p {
+        .service-item p {
+            font-size: 0.85rem;
             color: var(--text-muted);
-            font-size: 1rem;
-            line-height: 1.7;
-            position: relative;
-            z-index: 1;
+            line-height: 1.6;
         }
 
-        /* === CONTACT === */
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .contact-item {
-            padding: 2.5rem 2rem;
-            background: linear-gradient(135deg, var(--gray-800) 0%, var(--gray-900) 100%);
-            border-radius: 24px;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
-            text-decoration: none;
-            display: block;
-            position: relative;
+        /* === MARQUEE (WORKS) === */
+        .marquee-container {
             overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+            padding: 2rem 0;
         }
 
-        .contact-item::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(255, 42, 109, 0.1), transparent);
-            opacity: 0;
-            transition: opacity 0.4s ease;
+        .marquee-track {
+            display: inline-flex;
+            gap: 2rem;
+            animation: scroll 20s linear infinite;
         }
 
-        .contact-item:hover::before {
-            opacity: 1;
+        .work-card {
+            width: 350px;
+            height: 250px;
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            flex-shrink: 0;
+            border: 1px solid var(--border-light);
         }
 
-        .contact-item:hover {
-            transform: translateY(-10px) scale(1.02);
-            border-color: rgba(255, 42, 109, 0.5);
-            box-shadow: 0 20px 50px rgba(255, 42, 109, 0.2);
+        .work-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
-        .contact-icon {
-            font-size: 3rem;
-            margin-bottom: 1.5rem;
-            filter: grayscale(0);
-            transition: transform 0.4s ease;
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
         }
 
-        .contact-item:hover .contact-icon {
-            transform: scale(1.2) rotate(5deg);
+        /* === CONTACT SECTION - STYLES FOR THE INTERACTIVE FORM === */
+        .contact-section {
+            background: linear-gradient(180deg, var(--bg-dark) 0%, #fff8fa 100%);
+            /* Lighter gradient */
+            padding-bottom: 4rem;
         }
 
-        .contact-item h3 {
-            margin-bottom: 1rem;
-            font-size: 1.375rem;
-            color: white;
+        .contact-box {
+            text-align: center;
+            max-width: 800px;
+            /* Increased max width for the form */
+            margin: 0 auto;
+            border: 1px solid var(--border-light);
+            padding: 4rem;
+            /* Increased padding */
+            border-radius: 24px;
+            background: var(--bg-card);
+            /* White/light card background */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            backdrop-filter: blur(10px);
         }
 
-        .contact-item span,
-        .contact-item a {
-            color: var(--text-muted);
-            text-decoration: none;
-            transition: color 0.3s ease;
-            font-size: 1.05rem;
+        .contact-form {
+            margin-top: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            text-align: left;
         }
 
-        .contact-item:hover span,
-        .contact-item:hover a {
-            color: var(--accent-light);
+        .form-group {
+            display: flex;
+            flex-direction: column;
         }
+
+        .form-full {
+            grid-column: 1 / -1;
+        }
+
+        .contact-form label {
+            font-weight: 500;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+        }
+
+        .contact-form input,
+        .contact-form select,
+        .contact-form textarea {
+            padding: 1rem;
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 1rem;
+            color: var(--text-main);
+            background-color: var(--bg-dark);
+            /* Slightly darker background for input */
+            transition: all 0.3s ease;
+        }
+
+        /* INTERACTIVE FOCUS EFFECT */
+        .contact-form input:focus,
+        .contact-form select:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--primary-glow);
+            background-color: #fff;
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .submit-button {
+            grid-column: 1 / -1;
+            /* Make button full width */
+            margin-top: 1rem;
+            cursor: pointer;
+            border: none;
+            font-weight: 600;
+            /* Inherit button glow style but modify */
+            background: var(--primary);
+            color: #fff;
+            box-shadow: 0 5px 20px rgba(255, 42, 109, 0.3);
+            transition: transform 0.3s ease, background-color 0.3s;
+        }
+
+        /* Interactive button hover */
+        .submit-button:hover {
+            background: #e02360;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 42, 109, 0.6);
+        }
+
 
         /* === FOOTER === */
         footer {
+            border-top: 1px solid var(--border-light);
             padding: 2rem;
             text-align: center;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.8rem;
             color: var(--text-muted);
-            font-size: 0.9rem;
+            background: var(--bg-dark);
         }
 
-        /* === RESPONSIVE === */
+        /* === ANIMATION ON SCROLL === */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
-            section {
-                padding: 80px 1.5rem;
+            .hero h1 {
+                font-size: 4rem;
+                /* Adjusted for smaller screens to still look magical */
             }
-            .about-card { padding: 2rem; }
-            .work-item { width: 240px; height: 360px; margin: 0 10px; }
-            .works-track { animation-duration: 20s; }
-            .works-track.reverse { animation-duration: 18s; }
-            .why-card { min-height: auto; }
+
+            .services-wrapper {
+                padding: 2rem;
+            }
+
+            .section-title {
+                font-size: 3rem;
+            }
+
+            .nav-links {
+                gap: 20px;
+                font-size: 0.8rem;
+            }
+
+            .nav-logo {
+                font-size: 1.8rem;
+            }
+
+            .contact-form {
+                grid-template-columns: 1fr;
+                /* Single column on mobile */
+            }
+
+            .contact-box {
+                padding: 2rem;
+            }
         }
     </style>
 </head>
+
 <body>
-    <!-- Fixed Hero -->
+
+    <nav id="main-nav">
+        <div class="container nav-inner">
+            <a href="#" class="nav-logo">Dream Aura Events</a>
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#events">Events</a>
+                <a href="#services">Services</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </nav>
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <div class="preloader">
+        <div class="loader-text">Dream Aura Events</div>
+    </div>
+
     <div class="hero">
-        <img src="images/bg.png" alt="DREAM" class="hero-bg" />
-        <div class="hero-gradient"></div>
+        <img src="/Users/pithi/.gemini/antigravity/scratch/web_browser/home .jpeg" class="hero-video"
+            alt="/Users/pithi/.gemini/antigravity/scratch/web_browser/DJI_20251122192107_0050_D_A01.JPG">
+
         <div class="hero-content">
-            <h1>DREAM AURA EVENTS </h1>
-            <p>We don’t just plan events , we capture and design  experiences that last a lifetime</p>
-        </div>
-        <div class="scroll-indicator" onclick="document.querySelector('.content-wrapper').scrollIntoView({behavior:'smooth'})">
-            <span>Scroll</span>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M6 9l6 6 6-6"></path>
-            </svg>
+            <h1>Dream Aura Events</h1>
+            <p>Where your dream event meets our magic touch.</p>
+            <a href="#contact" class="btn-glow" onmouseenter="expandCursor()" onmouseleave="shrinkCursor()">Start
+                Planning</a>
         </div>
     </div>
 
-    <!-- Scrollable Content -->
-    <div class="content-wrapper">
-        <!-- About -->
-        <section id="about">
-            <div class="container">
-                <div class="section-header">
-                    <h2>About DREAM AURA </h2>
-                </div>
-                <div class="about-content">
-                    <div class="about-card">
-                        <p class="about-text">
-                            At Dream Aura Events, we are celebration storytellers, not just event organisers. Every occasion we craft is a living canvas where emotions, hues, and memories come to life, transforming an ordinary date into something truly extraordinary. What began as a vision of passionate dreamers has grown into a commitment to design events that radiate style, happiness, and confidence. From the extravagance of birthdays to the grandeur of weddings, and from formal corporate gatherings to vibrant cultural festivities, we handle every detail with precision and professionalism. <span class="about-highlight"></span>
-                        </p>
-                    </div>
-                    <div class="about-card">
-                        <p class="about-text">
-                              <span class="about-highlight"></span> <span class="about-highlight"> </span><span class="about-highlight"></span> For us, food is an experience beyond catering, photography captures more than images, and décor narrates more than beauty — together, they weave experiences that reflect your story, your vision, and your aura. With Dream Aura Events, your celebration doesn’t just happen — it breathes, it shines, and it remains timeless.
-                        </p>
-                    </div>
-                </div>
+    <section id="about">
+        <div class="container">
+            <div class="reveal">
+                <span class="section-subtitle">Who We Are</span>
+                <h2 class="section-title">Beyond Event Planning</h2>
+                <p
+                    style="text-align: center; max-width: 800px; margin: 0 auto; color: var(--text-muted); line-height: 1.8; font-size: 1.1rem;">
+                    Dream Aura Events is a full-service event management company. We specialize in transforming ordinary
+                    dates into extraordinary milestones. Whether it's the cultural vibrancy of a college fest, the
+                    discipline of a corporate summit, or the magic of a wedding day, we handle the chaos so you can
+                    enjoy the moment.
+                </p>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Why Us -->
-        <section id="why-us">
-            <div class="why-bg"></div>
-            <div class="container">
-                <div class="section-header">
-                    <h2>Social & Family Celebrations </h2>
-                </div>
-                <div class="why-grid">
-                    <div class="why-card">
-                        <div class="why-icon">🎂</div>
-                        <h3>Birthdays</h3>
-                        <p>From first birthdays to milestone years, we create fun, vibrant, and memorable parties.</p>
-                    </div>
-                    <div class="why-card">
-                        <div class="why-icon">💍</div>
-                        <h3>Weddings & Engagements</h3>
-                        <p>Stunning décor, timeless photography, and seamless management for your most cherished day.</p>
-                    </div>
-                    <div class="why-card">
-                        <div class="why-icon">⚡</div>
-                        <h3>Product Launches</h3>
-                        <p>Creative staging, branding, and media coverage to make your launch unforgettable.</p>
-                    </div>
-                    <div class="why-card">
-                        <div class="why-icon">🌍</div>
-                        <h3>Full Event Management</h3>
-                        <p>End-to-end planning, coordination, and execution — so you can focus on enjoying your special day.</p>
-                    </div>
-                </div>
+    <section id="events">
+        <div class="container">
+            <div class="reveal">
+                <span class="section-subtitle">Our Expertise</span>
+                <h2 class="section-title">Events We Curate</h2>
             </div>
-        </section>
 
-        <!-- Recent Works -->
-        <section class="works-section" id="works">
-            <div class="container">
-                <div class="section-header">
-                    <h2>Our Recent Works</h2>
-                </div>
-            </div>
-            <div class="works-marquee">
-                <div class="works-track">
-                    <div class="work-item">
-                        <img src="images/HHT.png" alt="Hip Hop Tamizha" class="work-img" />
-                        <div class="work-overlay">
-                            <h3>Chennai & Madurai</h3>
-                            <p>Hip Hop Tamizha Tour</p>
-                        </div>
-                    </div>
-                    <div class="work-item">
-                        <img src="images/d.png" alt="Ungal Deva" class="work-img" />
-                        <div class="work-overlay">
-                            <h3>Chennai</h3>
-                            <p>Ungal Deva Spiritual Concert</p>
-                        </div>
-                    </div>
-                    <div class="work-item">
-                        <img src="https://images.pexels.com/photos/2143/lights-party-dancing-music.jpg?auto=compress&cs=tinysrgb&w=800" alt="Prabhu Deva" class="work-img" />
-                        <div class="work-overlay">
-                            <h3>India's First</h3>
-                            <p>Prabhu Deva Dance Concert</p>
-                        </div>
-                    </div>
-                    <div class="work-item">
-                        <img src="images/t.png" alt="Thug Life" class="work-img" />
-                        <div class="work-overlay">
-                            <h3>Film Audio Launch</h3>
-                            <p>Thug Life</p>
-                        </div>
-                    </div>
-                    <div class="work-item">
-                        <img src="images/k.png" alt="Kubera" class="work-img" />
-                        <div class="work-overlay">
-                            <h3>Film Audio Launch</h3>
-                            <p>Kubera</p>
-                        </div>
-                    </div>
-                    <!-- Duplicates for seamless loop -->
-                    <div class="work-item">
-                        <img src="images/HHT.png" alt="Hip Hop Tamizha" class="work-img" />
-                        <div class="work-overlay">
-                            <h3>Chennai & Madurai</h3>
-                            <p>Hip Hop Tamizha Tour</p>
-                        </div>
-                    </div>
-                    <div class="work-item">
-                        <img src="images/d.png" alt="Ungal Deva" class="work-img" />
-                        <div class="work-overlay">
-                            <h3>Chennai</h3>
-                            <p>Ungal Deva Spiritual Concert</p>
-                        </div>
-                    </div>
-                    <div class="work-item">
-                        <img src="https://images.pexels.com/photos/2143/lights-party-dancing-music.jpg?auto=compress&cs=tinysrgb&w=800" alt="Prabhu Deva" class="work-img" />
-                        <div class="work-overlay">
-                            <h3>India's First</h3>
-                            <p>Prabhu Deva Dance Concert</p>
-                        </div>
-                    </div>
-                    <div class="work-item">
-                        <img src="images/t.png" alt="Thug Life" class="work-img" />
-                        <div class="work-overlay">
-                            <h3>Film Audio Launch</h3>
-                            <p>Thug Life</p>
-                        </div>
-                    </div>
-                    <div class="work-item">
-                        <img src="images/k.png" alt="Kubera" class="work-img" />
-                        <div class="work-overlay">
-                            <h3>Film Audio Launch</h3>
-                            <p>Kubera</p>
-                        </div>
+            <div class="grid-gallery reveal">
+                <div class="event-card">
+                    <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=2069&auto=format&fit=crop"
+                        class="event-bg" alt="Wedding">
+                    <div class="event-content">
+                        <h3>Weddings</h3>
+                        <p>Decor, Rituals & Cinematic Videography</p>
                     </div>
                 </div>
-            </div>
-            <div class="works-marquee" style="margin-top:40px;">
-                <div class="works-track reverse">
-                    <div class="work-item">
-                        <img src="images/k.png" alt="Kubera" class="work-img" />
-                        <div class="work-overlay">
-                            <h3>Film Audio Launch</h3>
-                            <p>Kubera</p>
-                        </div>
-                    </div>
-                    <div class="work-item">
-                        <img src="images/t.png" alt="Thug Life" class="work-img" />
-                        <div class="work-overlay">
-                            <h3>Film Audio Launch</h3>
-                            <p>Thug Life</p>
-                        </div>
-                    </div>
-                    <div class="work-item">
-                        <img src="https://images.pexels.com/photos/2143/lights-party-dancing-music.jpg?auto=compress&cs=tinysrgb&w=800" alt="Prabhu Deva" class="work-img" />
-                        <div class="work-overlay">
-                            <h3>India's First</h3>
-                            <p>Prabhu Deva Dance Concert</p>
-                        </div>
-                    </div>
-                    <div class="work-item">
-                        <img src="images/d.png" alt="Ungal Deva" class="work-img" />
-                        <div class="work-overlay">
-                            <h3>Chennai</h3>
-                            <p>Ungal Deva Spiritual Concert</p>
-                        </div>
-                    </div>
-                    <div class="work-item">
-                        <img src="images/HHT.png" alt="Hip Hop Tamizha" class="work-img" />
-                        <div class="work-overlay">
-                            <h3>Chennai & Madurai</h3>
-                            <p>Hip Hop Tamizha Tour</p>
-                        </div>
-                    </div>
-                    <!-- Duplicates -->
-                    <div class="work-item">
-                        <img src="images/k.png" alt="Kubera" class="work-img" />
-                        <div class="work-overlay">
-                            <h3>Film Audio Launch</h3>
-                            <p>Kubera</p>
-                        </div>
-                    </div>
-                    <div class="work-item">
-                        <img src="images/t.png" alt="Thug Life" class="work-img" />
-                        <div class="work-overlay">
-                            <h3>Film Audio Launch</h3>
-                            <p>Thug Life</p>
-                        </div>
-                    </div>
-                    <div class="work-item">
-                        <img src="https://images.pexels.com/photos/2143/lights-party-dancing-music.jpg?auto=compress&cs=tinysrgb&w=800" alt="Prabhu Deva" class="work-img" />
-                        <div class="work-overlay">
-                            <h3>India's First</h3>
-                            <p>Prabhu Deva Dance Concert</p>
-                        </div>
-                    </div>
-                    <div class="work-item">
-                        <img src="images/d.png" alt="Ungal Deva" class="work-img" />
-                        <div class="work-overlay">
-                            <h3>Chennai</h3>
-                            <p>Ungal Deva Spiritual Concert</p>
-                        </div>
-                    </div>
-                    <div class="work-item">
-                        <img src="images/HHT.png" alt="Hip Hop Tamizha" class="work-img" />
-                        <div class="work-overlay">
-                            <h3>Chennai & Madurai</h3>
-                            <p>Hip Hop Tamizha Tour</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
 
-        <!-- Approach -->
-        <section id="approach">
-            <div class="container">
-                <div class="section-header">
-                    <h2> Core Expertise </h2>
+                <div class="event-card">
+                    <img src="https://images.unsplash.com/photo-1515187029135-18ee286d815b?q=80&w=2070&auto=format&fit=crop"
+                        class="event-bg" alt="Corporate">
+                    <div class="event-content">
+                        <h3>Corporate</h3>
+                        <p>Summits, Product Launches & Galas</p>
+                    </div>
                 </div>
-                <div class="approach-grid">
-                    <div class="step-card">
-                        <div class="step-number">📷</div>
-                        <h3>Photography & Videography</h3>
-                        <p>Capturing candid emotions, rituals, and highlights in timeless frames.</p>
+
+                <div class="event-card">
+                    <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=2070&auto=format&fit=crop"
+                        class="event-bg" alt="Concert">
+                    <div class="event-content">
+                        <h3>College Culturals</h3>
+                        <p>Stage Management, Sound & Energy</p>
                     </div>
-                    <div class="step-card">
-                        <div class="step-number">💮</div>
-                        <h3>Décor & Styling</h3>
-                        <p>From minimal to extravagant, we design spaces that set the perfect mood and aura.</p>
-                    </div>
-                    <div class="step-card">
-                        <div class="step-number">🎯</div>
-                        <h3>Catering Solutions</h3>
-                        <p>Food that delights the taste buds and elevates your celebration.</p>
+                </div>
+
+                <div class="event-card">
+                    <img src="https://images.unsplash.com/photo-1526721940322-10fb6e3ae94a?q=80&w=2071&auto=format&fit=crop"
+                        class="event-bg" alt="Sports Day">
+                    <div class="event-content">
+                        <h3>School Annual/Sports</h3>
+                        <p>Logistics, Safety & Fun</p>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Contact -->
-        <section id="contact">
-            <div class="container">
-                <div class="section-header">
-                    <h2>Get in Touch</h2>
-                </div>
-                <div class="contact-grid">
-                    <a href="tel:+91" class="contact-item">
-                        <div class="contact-icon">📱</div>
-                        <h3>Call / WhatsApp</h3>
-                        <span>+91 123456789</span>
-                    </a>
-                    <a href="" class="contact-item">
-                        <div class="contact-icon">✉️</div>
-                        <h3>Email</h3>
-                        <span>demo@gmail.com</span>
-                    </a>
-                    <a href="" target="_blank" rel="noopener noreferrer" class="contact-item">
-                        <div class="contact-icon">📸</div>
-                        <h3>Instagram</h3>
-                        <span>insta id </span>
-                    </a>
+    <section id="services">
+        <div class="container reveal">
+            <span class="section-subtitle">What We Provide</span>
+            <h2 class="section-title">Comprehensive Solutions</h2>
+
+            <div class="services-wrapper">
+                <div class="services-grid">
+                    <div class="service-item">
+                        <div class="icon-box"><i data-lucide="camera"></i></div>
+                        <h4>Photography & Video</h4>
+                        <p>Cinematic highlights, drone shots, and candid photography.</p>
+                    </div>
+
+                    <div class="service-item">
+                        <div class="icon-box"><i data-lucide="utensils"></i></div>
+                        <h4>Catering & Buffet</h4>
+                        <p>Live food stalls, diverse cuisines, and hygienic buffet setups.</p>
+                    </div>
+
+                    <div class="service-item">
+                        <div class="icon-box"><i data-lucide="flower-2"></i></div>
+                        <h4>Stage & Decor</h4>
+                        <p>Thematic stage designs, floral arrangements, and lighting.</p>
+                    </div>
+
+                    <div class="service-item">
+                        <div class="icon-box"><i data-lucide="film"></i></div>
+                        <h4>Editing Suite</h4>
+                        <p>Professional video editing, color grading, and Instagram Reels creation.</p>
+                    </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <footer>
-            <p>© 2025 Dream Aura Events. All rights reserved.</p>
-        </footer>
-    </div>
+    <section id="works" style="padding: 60px 0;">
+        <div class="container">
+            <span class="section-subtitle" style="padding-left: 2rem;">Recent Projects</span>
+        </div>
+        <div class="marquee-container">
+            <div class="marquee-track">
+                <div class="work-card"><img
+                        src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=2070" alt="Work 1">
+                </div>
+                <div class="work-card"><img
+                        src="https://images.unsplash.com/photo-1519751138087-5bf797017214?q=80&w=2070" alt="Work 2">
+                </div>
+                <div class="work-card"><img
+                        src="https://images.unsplash.com/photo-1533174072545-e8d4aa97edf9?q=80&w=2070" alt="Work 3">
+                </div>
+                <div class="work-card"><img
+                        src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?q=80&w=2070" alt="Work 4">
+                </div>
+                <div class="work-card"><img
+                        src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=2070" alt="Work 1">
+                </div>
+                <div class="work-card"><img
+                        src="https://images.unsplash.com/photo-1519751138087-5bf797017214?q=80&w=2070" alt="Work 2">
+                </div>
+                <div class="work-card"><img
+                        src="https://images.unsplash.com/photo-1533174072545-e8d4aa97edf9?q=80&w=2070" alt="Work 3">
+                </div>
+                <div class="work-card"><img
+                        src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?q=80&w=2070" alt="Work 4">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <div class="contact-box reveal">
+                <h2 style="font-size: 2.5rem; margin-bottom: 0.5rem; color: var(--text-main);">Let's Create Magic</h2>
+                <p style="color: var(--text-muted); margin-bottom: 2rem; font-size: 1.1rem;">Tell us about your dream
+                    event and we'll handle the rest.</p>
+
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" name="name" required onfocus="expandCursor()"
+                            onblur="shrinkCursor()">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required onfocus="expandCursor()"
+                            onblur="shrinkCursor()">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" onfocus="expandCursor()" onblur="shrinkCursor()">
+                    </div>
+                    <div class="form-group">
+                        <label for="event-type">Type of Event</label>
+                        <select id="event-type" name="event-type" required onfocus="expandCursor()"
+                            onblur="shrinkCursor()">
+                            <option value="" disabled selected>Select an option</option>
+                            <option value="wedding">Wedding</option>
+                            <option value="corporate">Corporate Summit/Launch</option>
+                            <option value="college">College/Cultural Fest</option>
+                            <option value="school">School Annual/Sports Day</option>
+                            <option value="other">Other/Private Party</option>
+                        </select>
+                    </div>
+                    <div class="form-group form-full">
+                        <label for="details">Event Details/Message</label>
+                        <textarea id="details" name="details" rows="5" required onfocus="expandCursor()"
+                            onblur="shrinkCursor()"></textarea>
+                    </div>
+                    <button type="submit" class="btn-glow submit-button" onmouseenter="expandCursor()"
+                        onmouseleave="shrinkCursor()">
+                        Send Your Dream Plan
+                    </button>
+                </form>
+
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Dream Aura Events. Crafted with <span style="color:var(--primary)">♥</span> in India.</p>
+        </div>
+    </footer>
 
     <script>
-        document.querySelector('.scroll-indicator').addEventListener('click', () => {
-            document.querySelector('.content-wrapper').scrollIntoView({ behavior: 'smooth' });
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Custom Cursor Logic
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+        const formInputs = document.querySelectorAll('.contact-form input, .contact-form select, .contact-form textarea');
+
+        window.addEventListener('mousemove', (e) => {
+            const posX = e.clientX;
+            const posY = e.clientY;
+
+            cursorDot.style.left = `${posX}px`;
+            cursorDot.style.top = `${posY}px`;
+
+            // Add delay to outline for smooth effect
+            cursorOutline.animate({
+                left: `${posX}px`,
+                top: `${posY}px`
+            }, { duration: 500, fill: "forwards" });
         });
+
+        // Function to handle cursor expansion on hover/focus
+        function expandCursor() {
+            cursorOutline.style.width = '70px';
+            cursorOutline.style.height = '70px';
+            cursorOutline.style.backgroundColor = 'rgba(255, 42, 109, 0.1)';
+        }
+
+        // Function to handle cursor shrinking
+        function shrinkCursor() {
+            cursorOutline.style.width = '40px';
+            cursorOutline.style.height = '40px';
+            cursorOutline.style.backgroundColor = 'transparent';
+        }
+
+        // Apply expand/shrink to all interactive elements
+        document.querySelectorAll('a, button, [role="button"]').forEach(el => {
+            el.addEventListener('mouseenter', expandCursor);
+            el.addEventListener('mouseleave', shrinkCursor);
+        });
+
+        // Note: For inputs, the onfocus/onblur attributes were added directly to the HTML.
+
+        // SCROLL INTERACTION FOR NAVIGATION (NEW)
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('main-nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('nav-scrolled');
+            } else {
+                nav.classList.remove('nav-scrolled');
+            }
+        });
+
+
+        // Scroll Reveal Logic
+        window.addEventListener('scroll', reveal);
+
+        function reveal() {
+            var reveals = document.querySelectorAll('.reveal');
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var revealTop = reveals[i].getBoundingClientRect().top;
+                var revealPoint = 150;
+
+                if (revealTop < windowHeight - revealPoint) {
+                    reveals[i].classList.add('active');
+                }
+            }
+        }
+
+        // Trigger once on load
+        reveal();
     </script>
 </body>
+
 </html>
